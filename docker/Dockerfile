@@ -9,6 +9,7 @@ RUN apt update && apt install -y \
     wget
 
 ENV CONTAINTER_NAME="Quarto with Tidyverse"
+ENV R_LIBS_USER=/lib/R/site-library
 
 RUN R -e "install.packages('knitr',dependencies=TRUE, repos='http://cran.rstudio.com/')"
 RUN R -e "install.packages('tidyverse',dependencies=TRUE, repos='http://cran.rstudio.com/')"
