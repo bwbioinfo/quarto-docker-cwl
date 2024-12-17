@@ -8,11 +8,13 @@ RUN apt update && apt install -y \
     r-base-dev \
     wget
 
-ENV CONTAINTER_NAME="Quarto with Tidyverse"
+ENV CONTAINER_NAME="Quarto with Tidyverse"
 ENV R_LIBS_USER=/lib/R/site-library
 
-RUN R -e "install.packages('knitr',dependencies=TRUE, repos='http://cran.rstudio.com/')"
-RUN R -e "install.packages('tidyverse',dependencies=TRUE, repos='http://cran.rstudio.com/')"
+ENV R_LIBS_USER=/usr/local/lib/R/site-library
+RUN mkdir -p ${R_LIBS_USER}
+
+RUN R -e "install.packages(c('knitr', 'tidyverse', 'kableExtra'),dependencies=TRUE, repos='http://cran.rstudio.com/')"
 
 RUN wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.6.39/quarto-1.6.39-linux-amd64.deb
 
