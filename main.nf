@@ -6,19 +6,21 @@ process generate_report {
     
     input:
     file results
-    path template
-    val report_name
+    path report_template
+    val report_filename
     val report_title
+    val report_description
 
     output:
-    file "${report_name}.html"
+    file "${report_filename}.html"
 
     script:
     """
-    quarto render report.qmd --to html \
-    -P workflow_name:"${report_title}" \
+    quarto render ${report_template} --to html \
+    -P report_title:"${report_title}" \
+    -P report_description:"${report_description}" \
     -P analysis_date:"\$(date +'%Y-%m-%d')" \
     -P results_file:"${results}" \
-    --output ${report_name}.html
+    --output ${report_filename}.html
     """
 }
