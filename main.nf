@@ -23,10 +23,10 @@ process GENERATE_REPORT {
     task.ext.when == null || task.ext.when
 
     script:
-    def args = task.ext.args ?: '--all'
+    def args = task.ext.args ?: '--to html'
     def prefix = task.ext.prefix ?: "${meta.id}"
     """
-    quarto render ${report_template} --to html \
+    quarto render ${report_template} ${args} \
     -P report_title:"${report_title}" \
     -P report_description:"${report_description}" \
     -P analysis_date:"\$(date +'%Y-%m-%d')" \
