@@ -1,11 +1,10 @@
 
 process GENERATE_REPORT {
     container 'ghcr.io/bwbioinfo/quarto-docker-cwl:latest'
-
-    publishDir "output", mode: 'copy'
     
     tag "$meta.id"
     label 'process_low'
+    errorStrategy { task.attempt <= 3 ? 'retry' : 'terminate' }
 
     publishDir "output", mode: 'copy'
 
@@ -40,11 +39,11 @@ process GENERATE_REPORT {
     """
 
     stub:
-    def prefix = task.ext.prefix ?: "${meta.id}"
     """
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
         quarto: \$( quarto --version )
     END_VERSIONS
     """
+
 }
