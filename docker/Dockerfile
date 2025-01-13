@@ -6,7 +6,10 @@ RUN apt update && apt install -y \
     python3 \
     python3-pip \
     r-base-dev \
+    pipx \
     wget
+
+RUN pipx install jupyter --include-deps
 
 ENV CONTAINER_NAME="Quarto with Tidyverse"
 ENV R_LIBS_USER=/lib/R/site-library
