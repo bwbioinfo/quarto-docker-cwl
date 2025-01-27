@@ -17,7 +17,7 @@ ENV R_LIBS_USER=/lib/R/site-library
 ENV R_LIBS_USER=/usr/local/lib/R/site-library
 RUN mkdir -p ${R_LIBS_USER}
 
-RUN R -e "install.packages(c('knitr', 'tidyverse', 'kableExtra'),dependencies=TRUE, repos='http://cran.rstudio.com/')"
+RUN R -e "install.packages(c('knitr', 'tidyverse', 'kableExtra', 'vroom'),dependencies=TRUE, repos='http://cran.rstudio.com/')"
 
 RUN wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.6.39/quarto-1.6.39-linux-amd64.deb
 

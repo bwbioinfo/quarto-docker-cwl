@@ -105,7 +105,7 @@ process QUARTO_TABLE {
     #| tbl-cap-location: bottom
     library(readr)
     library(knitr)
-    data <- read_tsv("${table_data}", col_names = ${col_names}, show_col_types = FALSE)
+    data <- vroom::vroom("${table_data}", col_names = ${col_names}, show_col_types = FALSE)
     data |>
     head(1000) |>
     kable()
