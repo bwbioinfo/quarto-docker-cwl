@@ -220,3 +220,7 @@ process QUARTO_SECTION {
     END_VERSIONS
     """
 }
+
+/* 
+TODO: Add process for collecting multiple figures into a single quarto figure with subfigures
+*/
