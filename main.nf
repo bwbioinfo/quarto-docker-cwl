@@ -84,7 +84,8 @@ process QUARTO_TABLE {
         val(section),
         path("*_inputs"),
         emit: quarto_table
-    path "versions.yml", emit: versions
+    path "versions.yml",
+        emit: versions
 
 
     when:
@@ -92,7 +93,8 @@ process QUARTO_TABLE {
 
     script:
     def prefix = task.ext.prefix ?: "${meta.id}"
-
+    // Turn off column names if col_names is "F"
+    def colnames_toggle = (col_names == "F") ? "" : "col.names = NULL"
     """
     mkdir ${prefix}_${section}_${process}_inputs
     cp ${table_data} ${prefix}_${section}_${process}_inputs/${table_data}
@@ -108,7 +110,7 @@ process QUARTO_TABLE {
     data <- vroom::vroom("${table_data}", col_names = ${col_names}, show_col_types = FALSE)
     data |>
     head(1000) |>
-    kable()
+    kable(${colnames_toggle})
     \\`\\`\\`
 
     END_REPORT
