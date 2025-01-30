@@ -94,7 +94,7 @@ process QUARTO_TABLE {
     script:
     def prefix = task.ext.prefix ?: "${meta.id}"
     // Turn off column names if col_names is "F"
-    def colnames_toggle = (col_names == "F") ? "" : "col.names = NULL"
+    def colnames_toggle = (col_names == "F") ? "col.names = NULL" : ""
     """
     mkdir ${prefix}_${section}_${process}_inputs
     cp ${table_data} ${prefix}_${section}_${process}_inputs/${table_data}
